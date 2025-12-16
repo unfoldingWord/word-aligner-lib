@@ -5,6 +5,7 @@ import {
   convertAlignmentFromVerseToVerseSpan,
 } from "../helpers/alignmentHelpers";
 import {convertVerseDataToUSFM } from "../helpers/UsfmFileConversionHelpers";
+import * as verseHelpers from "../helpers/verseHelpers";
 
 const en_ust_gal_2_data = require(`./fixtures/alignments/en_gal_2_data.json`);
 const en_ust_gal_2_usfm = en_ust_gal_2_data.ust_usfm;
@@ -14,6 +15,30 @@ const ugnt_gal_2_verseObjects = en_ust_gal_2_data.ugnt_verseObjects;
 const en_ust_gal_2_verseObjects = getParsedUSFM(en_ust_gal_2_usfm);
 const en_ust_gal_2_no_alignments_verseObjects = getParsedUSFM(en_ust_gal_2_no_alignments_usfm);
 const en_ust_gal_2_partial_alignments_verseObjects = getParsedUSFM(en_ust_gal_2_partial_alignments_usfm);
+
+describe('verseSpan ', () => {
+
+  it('test getVerse()', () => {
+    const chapter = '2';
+    const verseSpan = '11-13';
+    const verseData = verseHelpers.getVerse(en_ust_gal_2_verseObjects.chapters[chapter], verseSpan);
+    expect(verseData).toMatchSnapshot();
+  })
+
+  it('test getBestVerseFromChapter()', () => {
+    const chapter = '2';
+    const verseSpan = '11-13';
+    const verseData = verseHelpers.getBestVerseFromChapter(en_ust_gal_2_verseObjects.chapters[chapter], verseSpan);
+    expect(verseData).toMatchSnapshot();
+  })
+
+  it('test getBestVerseFromChapter()', () => {
+    const chapter = '2';
+    const verseSpan = '2-3';
+    const verseData = verseHelpers.getBestVerseFromChapter(en_ust_gal_2_verseObjects.chapters[chapter], verseSpan);
+    expect(verseData).toMatchSnapshot();
+  })
+})
 
 describe('test verseSpans round trip conversions', () => {
 

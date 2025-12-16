@@ -131,8 +131,7 @@ export function validateSelectionsForAllChecks(targetBible, groupsData = null, i
       let targetVerse = filteredVerses[ref]
       if (!targetVerse) {
         targetVerse = getVerseText(targetBible, check.contextId, false)
-        targetVerse = usfm.removeMarker(targetVerse) // remove USFM markers
-        filteredVerses[ref] = targetVerse
+        filteredVerses[ref] = targetVerse.verseText
       }
 
       if (targetVerse) {
