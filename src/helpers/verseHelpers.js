@@ -73,7 +73,7 @@ export function getVerse(chapterData, verse ) {
     verseLabel = verseNum;
   } else {
     for (let verse_ in chapterData) {
-      if (verseHelpers.isVerseSpan(verse_)) {
+      if (isVerseSpan(verse_)) {
         if (isVerseWithinVerseSpan(verse_, verseNum)) {
           verseData = chapterData[verse_];
           verseLabel = verse_;
@@ -119,13 +119,13 @@ export function getBestVerseFromChapter(chapterData, verse, addVerseRef=false) {
 
     if (!verseData) {
       const history = []; // to guard against duplicate verses
-      const verseList = verseHelpers.getVerseList(verse);
+      const verseList = getVerseList(verse);
       let verses = [];
 
       for (const verse_ of verseList) {
-        if (verseHelpers.isVerseSpan(verse_)) {
+        if (isVerseSpan(verse_)) {
           // iterate through all verses in span
-          const { low, high } = verseHelpers.getVerseSpanRange(verse_);
+          const { low, high } = getVerseSpanRange(verse_);
 
           for (let i = low; i <= high; i++) {
             addVerse(chapterData, verses, history, i, addVerseRef);
