@@ -6,12 +6,13 @@ import {removeUsfmMarkers} from "./usfmHelpers";
 import {getUsfmForVerseContent} from "./UsfmFileConversionHelpers";
 
 /**
- * test to see if verse is a verseSpan
+ * test if verse is valid verse span string
  * @param {string|number} verse
  * @return {boolean}
  */
 export function isVerseSpan(verse) {
-  return verse.toString().includes('-');
+  const isSpan = (typeof verse === 'string') && verse.includes('-');
+  return isSpan;
 }
 
 /**
@@ -107,6 +108,35 @@ function addVerse(chapterData, verses, history, verse, addVerseRef=false) {
 }
 
 /**
+ * get verse range from span
+ * @param {string} verseSpan
+ * @return {{high: number, low: number}}
+ */
+export function getVerseSpanRange(verseSpan) {
+  let [low, high] = verseSpan.split('-');
+
+  if (low && high) {
+    low = parseInt(low, 10);
+    high = parseInt(high, 10);
+
+    if ((low > 0) && (high >= low)) {
+      return { low, high };
+    }
+  }
+  return {};
+}
+
+/**
+ * splits verse list into individual verses
+ * @param {string} verseStr
+ * @return {[number]}
+ */
+export function getVerseList(verseStr) {
+  const verses = verseStr.toString().split(',');
+  return verses;
+}
+
+/**
  * find verse data from verse or verse span
  * @param {object} chapterData
  * @param {string|number} verse
@@ -164,10 +194,11 @@ export function getBestVerseFromChapter(chapterData, verse, addVerseRef=false) {
 }
 
 /**
- *  Gets both the verse text without usfm markers and unfilteredVerseText.
+ *  Gets both the verse text without usfm markers and unfilteredVerseText (with USFM markers).
  * @param {object} bookData - current book data
  * @param {object} contextId - context id
  * @param {boolean} addVerseRef - if true then we add verse marker inline
+ * @return {{unfilteredVerseText: string, verseText: string}}
  */
 export function getVerseText(bookData, contextId, addVerseRef=false) {
   let unfilteredVerseText = '';
