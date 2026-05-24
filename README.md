@@ -24,4 +24,8 @@ A Node Library for USFM and alignment operations.  Business logic was split out 
   - then run `yarn` to install dependencies
   - then run `yarn test` to lrun the unit tests
 
+## Publishing
 
+```bash
+yarn && yarn run prepublishOnly && yarn publish --tag beta
+```

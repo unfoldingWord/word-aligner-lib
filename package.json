@@ -1,6 +1,6 @@
 {
   "name": "word-aligner-lib",
-  "version": "1.0.1",
+  "version": "1.1.0-beta.2",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
   "repository": "https://github.com/unfoldingWord-dev/word-aligner-lib.git",
@@ -53,8 +53,8 @@
     "lodash.clonedeep": "^4.5.0",
     "string-punctuation-tokenizer": "2.2.0",
     "tc-strings": "^0.1.6",
-    "usfm-js": "3.4.3",
-    "word-aligner": "1.0.3",
+    "usfm-js": "3.5.0",
+    "word-aligner": "1.1.0",
     "wordmap-lexer": "^0.3.6"
   },
   "resolutions": {
